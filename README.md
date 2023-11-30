@@ -4,22 +4,18 @@
 
 PMapper-go is a Go implementation of the [PMapper](https://github.com/nccgroup/PMapper) Python project
 
-As of 11/29/2023, it is currently at parity with the original project's main branch.
+As of 11/29/2023, I am  currently striving towards parity with the original project's main branch.
 
 ## Installation
 
 ### Requirements
-PMapper-go was built with go 1.24.4, and the project includes a [Hermit](https://github.com/cashapp/hermit) `bin` folder to 
+PMapper-go was built with [go 1.24.4](https://go.dev/), and the project includes a [Hermit](https://github.com/cashapp/hermit) `bin` folder to 
 mirror my dev environment if you want to tinker and run locally.
 
-After cloning, you should be able to fetch all of the necessary Go dependencies with
+After cloning, you should be able to fetch all the necessary Go dependencies with
 ```zsh
 go mod tidy
 ```
-
-### Installing from `Releases`
-- Download the latest release from the [Releases](https://github.com/sheikhrachel/PMapper-go/releases) page
-- [Docker](https://docs.docker.com/get-docker/)
 
 ## Usage
 
@@ -49,6 +45,8 @@ $ pmapper --account 000000000000 visualize --filetype svg
 ```
 
 ### Contributions
+
+TODO (rsheikh) - complete this section & add contribution templates
 
 ### License
 ```text
