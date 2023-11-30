@@ -16,11 +16,24 @@ type OrgNode struct {
 	Tags map[string]string `json:"tags"`
 }
 
+// NewOrgNode creates a new organization node object.
+func NewOrgNode(id, name string, accounts []OrgAccount, childNodes []OrgNode, scps []Policy, tags map[string]string) (orgNode *OrgNode, err error) {
+	orgNode = &OrgNode{
+		ID:         id,
+		Name:       name,
+		Accounts:   accounts,
+		ChildNodes: childNodes,
+		SCPs:       scps,
+		Tags:       tags,
+	}
+	if orgNode.Tags == nil {
+		orgNode.Tags = make(map[string]string)
+	}
+	return orgNode, nil
+}
+
 // Map returns a map representation of the org node.
 func (o *OrgNode) Map() map[string]interface{} {
-	if o.Tags == nil {
-		o.Tags = make(map[string]string)
-	}
 	return map[string]interface{}{
 		"ou_id":       o.ID,
 		"ou_name":     o.Name,

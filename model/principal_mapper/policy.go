@@ -12,6 +12,18 @@ type Policy struct {
 	PolicyDoc map[string]interface{} `json:"policy_doc"`
 }
 
+// NewPolicy creates a new policy object.
+func NewPolicy(arn, name string, policyDoc map[string]interface{}) (policy *Policy, err error) {
+	if err = validatePolicy(arn, policyDoc); errUtils.HandleError(err) {
+		return nil, err
+	}
+	return &Policy{
+		Arn:       arn,
+		Name:      name,
+		PolicyDoc: policyDoc,
+	}, nil
+}
+
 // Map returns a map representation of the policy.
 func (p *Policy) Map() map[string]interface{} {
 	return map[string]interface{}{
@@ -21,13 +33,13 @@ func (p *Policy) Map() map[string]interface{} {
 	}
 }
 
-// Validate ensures that the policy has all required fields.
-func (p *Policy) Validate() (err error) {
-	if p.Arn == "" {
-		err = errUtils.ErrArnEmpty
+// validatePolicy ensures that the policy has all required fields.
+func validatePolicy(arn string, policyDoc map[string]interface{}) error {
+	if arn == "" {
+		return errUtils.ErrArnEmpty
 	}
-	if p.PolicyDoc == nil {
-		err = errUtils.ErrPolicyDocNil
+	if policyDoc == nil {
+		return errUtils.ErrPolicyDocNil
 	}
-	return err
+	return nil
 }

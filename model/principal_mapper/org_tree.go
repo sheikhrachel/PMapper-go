@@ -26,15 +26,36 @@ type OrgTree struct {
 	Metadata map[string]string `json:"metadata"`
 }
 
+// NewOrgTree creates a new organization tree object.
+func NewOrgTree(
+	id, managementAccountID string,
+	rootOUs []OrgNode,
+	allSCPs []Policy,
+	accounts []string,
+	edgeList []Edge,
+	metadata map[string]string,
+) (orgTree *OrgTree, err error) {
+	orgTree = &OrgTree{
+		ID:                  id,
+		ManagementAccountID: managementAccountID,
+		RootOUs:             rootOUs,
+		AllSCPs:             allSCPs,
+		Accounts:            accounts,
+		EdgeList:            edgeList,
+		Metadata:            metadata,
+	}
+	if orgTree.Metadata == nil {
+		orgTree.Metadata = make(map[string]string)
+	}
+	return orgTree, nil
+}
+
 /*
 Map returns a map representation of the org tree.
 	Used for serialization to disk. SCPs and metadata are excluded
 	since `SaveOrgToDisk` does those in a separate file.
 */
 func (o *OrgTree) Map() map[string]interface{} {
-	if o.Metadata == nil {
-		o.Metadata = make(map[string]string)
-	}
 	return map[string]interface{}{
 		"org_id":                o.ID,
 		"management_account_id": o.ManagementAccountID,

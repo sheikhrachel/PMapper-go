@@ -6,11 +6,29 @@ import (
 	"github.com/sheikhrachel/PMapper-go/api_common/errUtils"
 )
 
+// Edge represents an edge in the organization graph.
 type Edge struct {
-	Source      string `json:"source"`
+	// Source is the source of the edge
+	Source string `json:"source"`
+	// Destination is the destination of the edge
 	Destination string `json:"destination"`
-	Reason      string `json:"reason"`
+	// Reason is the reason for the edge
+	Reason string `json:"reason"`
+	// ShortReason is a short reason for the edge
 	ShortReason string `json:"short_reason"`
+}
+
+// NewEdge creates a new edge object.
+func NewEdge(source, destination, reason, shortReason string) (edge *Edge, err error) {
+	if err = validateEdge(source, destination, reason, shortReason); errUtils.HandleError(err) {
+		return nil, err
+	}
+	return &Edge{
+		Source:      source,
+		Destination: destination,
+		Reason:      reason,
+		ShortReason: shortReason,
+	}, nil
 }
 
 const describeTmpl = "{%+v} {%+v} {%+v}"
@@ -30,18 +48,18 @@ func (e *Edge) Map() map[string]string {
 	}
 }
 
-// Validate ensures that the edge has all required fields.
-func (e *Edge) Validate() (err error) {
-	if e.Source == "" {
+// validateEdge ensures that the edge has all required fields.
+func validateEdge(source, destination, reason, shortReason string) (err error) {
+	if source == "" {
 		err = errUtils.ErrSourceEmpty
 	}
-	if e.Destination == "" {
+	if destination == "" {
 		err = errUtils.ErrDestinationEmpty
 	}
-	if e.Reason == "" {
+	if reason == "" {
 		err = errUtils.ErrReasonEmpty
 	}
-	if e.ShortReason == "" {
+	if shortReason == "" {
 		err = errUtils.ErrShortReasonEmpty
 	}
 	return err
