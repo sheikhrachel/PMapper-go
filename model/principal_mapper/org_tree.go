@@ -52,6 +52,7 @@ func NewOrgTree(
 
 /*
 Map returns a map representation of the org tree.
+
 	Used for serialization to disk. SCPs and metadata are excluded
 	since `SaveOrgToDisk` does those in a separate file.
 */

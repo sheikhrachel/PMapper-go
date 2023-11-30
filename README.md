@@ -9,7 +9,7 @@ As of 11/29/2023, I am  currently striving towards parity with the original proj
 ## Installation
 
 ### Requirements
-PMapper-go was built with [go 1.24.4](https://go.dev/), and the project includes a [Hermit](https://github.com/cashapp/hermit) `bin` folder to 
+PMapper-go was built with [go 1.24.4](https://go.dev/), and the project includes a [Hermit](https://github.com/cashapp/hermit) `bin` folder to
 mirror my dev environment if you want to tinker and run locally.
 
 After cloning, you should be able to fetch all the necessary Go dependencies with

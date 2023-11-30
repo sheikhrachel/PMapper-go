@@ -34,6 +34,7 @@ func (os OperatingSystem) String() string {
 
 /*
 GetStorageRoot locates and returns a path to the storage root, depending on OS.
+
 	If the path does not exist yet, it is created.
 */
 func GetStorageRoot() (path string, err error) {
